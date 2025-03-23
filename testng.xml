@@ -12,6 +12,7 @@
                 <methods>
                     <include name="setupStudentPage"/>
                     <include name="addNewStudent"/>
+                    <include name="DeleteAStudent"/>
                 </methods>
             </class>
         </classes>
