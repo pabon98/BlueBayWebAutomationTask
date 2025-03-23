@@ -1,5 +1,6 @@
 package testcases;
-
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -18,9 +19,41 @@ public class TestStudentPage extends DriverSetUp {
         student_wait.until(ExpectedConditions.textToBePresentInElementLocated(studentPage.student_list_text_locator, "Student List"));
     }
     @Test
-    public void addNewStudent(){
+    public void addNewStudent() throws InterruptedException {
         studentPage.clickOneElement(studentPage.add_student_locator);
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(studentPage.create_student_account_locator, "Create Student Account"));
+        studentPage.clickOneElement(studentPage.student_consultant_selectBox);
+
+       // select consultant
+        Actions selectedActions = new Actions(getDriver());
+        selectedActions.sendKeys("Muhammad  Usman").build().perform();
+        Thread.sleep(2000);
+        selectedActions.sendKeys(Keys.ENTER).build().perform();
+
+        // select preferred country
+       studentPage.clickOneElement(studentPage.select_prefer_country_locator);
+        Actions selectPreferredCountry = new Actions(getDriver());
+        selectPreferredCountry.sendKeys("Canada").build().perform();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        selectPreferredCountry.sendKeys(Keys.ENTER).build().perform();
+
+        // First Name
+        studentPage.writeOneElement(studentPage.first_name_locator, "Md. Hasin Anjum");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        // Last Name
+        studentPage.writeOneElement(studentPage.last_name_locator, "pabon");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        // Email
+        studentPage.writeOneElement(studentPage.email_locator, "hpabon1234@mail.com");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        // Create Student
+        studentPage.clickOneElement(studentPage.create_student_Btn_locator);
+
+        WebDriverWait alertWait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        alertWait.until(ExpectedConditions.textToBePresentInElementLocated(studentPage.student_add_alert, "Student added successfully"));
+        studentPage.clickOneElement(studentPage.student_complete_profile_locator);
+
     }
+
 }

@@ -19,6 +19,7 @@ return LOCAL_DRIVER.get();
     @BeforeSuite
     public void openABrowser(){
     WebDriver driver = new ChromeDriver();
+    driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     setDriver(driver);
     }
