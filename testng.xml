@@ -14,7 +14,14 @@
                     <include name="addNewStudent"/>
                     <include name="EditAStudent"/>
                     <include name="DeleteAStudent"/>
-
+                </methods>
+            </class>
+            <class name="testcases.TestProviderPage">
+                <methods>
+                    <include name="GotoAddProviderPage"/>
+                    <include name="CreateProviderWithEmptyData"/>
+                    <include name="CreateProviderWithInvalidEmail"/>
+                    <include name="createProviderWithValidData"/>
                 </methods>
             </class>
         </classes>
